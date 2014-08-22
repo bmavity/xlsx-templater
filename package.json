@@ -1,0 +1,27 @@
+{
+  "name": "xlsx-templater",
+  "author": "Brian Mavity <brian@brianmavity.com> (http://www.brianmavity.com)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bmavity/xlsx-templater.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bmavity/xlsx-templater/issues"
+  },
+  "contributors": [
+    "Brian Mavity <brian@brianmavity.com> (http://www.brianmavity.com)"
+  ],
+  "description": "Use any existing .xlsx file as a template",
+  "dependencies": {
+    "async": "^0.9.0",
+    "xml2js": "^0.4.4"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "scripts": {},
+  "keywords": [],
+  "license": "mit +no-false-attribs, +no-advertising license",
+  "main": "./xlsx-templater.js",
+  "version": "0.0.1"
+}
