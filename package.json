@@ -23,5 +23,5 @@
   "keywords": [],
   "license": "mit +no-false-attribs, +no-advertising license",
   "main": "./xlsx-templater.js",
-  "version": "0.0.1"
+  "version": "0.1.0"
 }

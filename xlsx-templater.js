@@ -81,20 +81,32 @@ XlsxFile.prototype.getWorksheet = function(worksheetName, cb) {
 }
 
 XlsxFile.prototype.writeFile = function(fileName, cb) {
-	var xlsx = this._xlsx
-
-/*
-	var sharedStringsXml = new Builder().buildObject(this._sst._rawSharedStrings)
-	xlsx.file('xl/sharedStrings.xml')
-*/
-
-	this._generatedWorksheets.forEach(function(generatedWorksheet){
-		var worksheetXml = new Builder().buildObject(generatedWorksheet.worksheet)
-		xlsx.file(generatedWorksheet.path, worksheetXml)
+	this._generateFile(function(err, data) {
+		if(err) return cb(err)
+		fs.writeFile(fileName, data, cb)
 	})
+}
 
-	var data = this._xlsx.generate({ type: 'nodebuffer' })
-	fs.writeFile(fileName, data, cb)
+XlsxFile.prototype.generateFile = function(cb) {
+	var xlsx = this._xlsx
+		, err = null
+		, data
+
+	try {
+		this._generatedWorksheets.forEach(function(generatedWorksheet){
+			var worksheetXml = new Builder().buildObject(generatedWorksheet.worksheet)
+			xlsx.file(generatedWorksheet.path, worksheetXml)
+		})
+
+		data = this._xlsx.generate({ type: 'nodebuffer' })
+	}
+	catch(ex) {
+		err = ex
+	}
+
+	setImmediate(function() {
+		cb(err, data)
+	})
 }
 
 function addCells(allCells, row) {
